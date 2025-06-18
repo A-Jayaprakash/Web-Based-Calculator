@@ -1,0 +1,66 @@
+.calculator {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 60px;
+    width: 100%;
+}
+
+.display {
+    width: 500px;
+    height: 100%;
+    color: black;
+    font-size: 30px;
+    text-align: right;
+    padding: 40px;
+    box-sizing: border-box;
+}
+#Mode {
+    background-color: #cc6622;
+    color: white;
+    width: 100px;
+    height: 50px;
+    font-size: 15px;
+    border-radius: 25px;
+}
+
+#equals {
+    background-color: #cc6622;
+}
+
+#divide {
+    font-size: 30px;
+}
+
+#minus {
+    font-size: 30px;
+}
+
+#multiply {
+    font-size: 25px;
+}
+
+#plus {
+    font-size: 25px;
+}
+
+#decimal {
+    font-size: 25px;
+}
+
+.display {
+    font-family: monospace;
+}
+
+button {
+    margin-right: 10px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: none;
+    background: gray;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+}
