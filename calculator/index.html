@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Calculator</title>
+    <link rel="stylesheet" href="modern-calculator.css">
+</head>
+
+<body>
+    <div class="calculator-wrapper">
+        
+        
+        
+        <!-- So this portion of part is going to take care of the top panel buttons like theme, mode, graph and history -->
+        <div class="top-controls">
+            
+            <div class="control-group">
+                <button class="control-btn" id="themeBtn">🌙 Dark</button>
+                <button class="control-btn" id="modeBtn">🔬 Scientific</button>
+            </div>
+
+            <div class="control-group">
+                <button class="control-btn" id="graphBtn">📊 Graph</button>
+                <button class="control-btn" id="historyBtn">📜 History</button>
+            </div>
+
+        </div>
+
+
+
+        <!-- This portion of code is going to be the input text for graph equation -->
+        <div class="graph-input" id="graphInput">
+            
+            <input type="text" placeholder="Enter equation (e.g., x^2, sin(x), log(x))" id="graphEquation">
+        
+        </div>
+
+
+
+        <!-- This portion holds the display containers for both past and current expression -->
+        <div class="display-container">
+            
+            <div class="display-history" id="displayHistory"></div>
+            <div class="display-main" id="displayMain">0</div>
+        
+        </div>
+
+        
+        
+        <!-- This is the main layout, where I've splitted it into 3 grids: Graph gird, Basic/Scientific grid, History grid -->
+        <div class="main-layout">
+            
+            <!-- This part is for the Graph Panel -->
+            <div class="graph-panel" id="graphPanel">
+                <div class="graph-container">
+                    <div style="position: relative; height: 400px;">
+                        <canvas class="graph-canvas" id="graphCanvas"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- This part is for the calculator panel, which will be taken by two divs interchangebly -->
+            <div class="calculator-panel">
+                <!-- This part is the basic arithmetic calculator -->
+                <div class="button-grid" id="basicCalc">
+                    
+                    <button class="calc-btn clear" onclick="clearAll()">AC</button>
+                    <button class="calc-btn clear" onclick="clearEntry()">CE</button>
+                    <button class="calc-btn operator" onclick="addToEquation('%')">%</button>
+                    <button class="calc-btn operator" onclick="addToEquation('/')">÷</button>
+                    
+                    <button class="calc-btn number" onclick="addToEquation('7')">7</button>
+                    <button class="calc-btn number" onclick="addToEquation('8')">8</button>
+                    <button class="calc-btn number" onclick="addToEquation('9')">9</button>
+                    <button class="calc-btn operator" onclick="addToEquation('*')">×</button>
+                    
+                    <button class="calc-btn number" onclick="addToEquation('4')">4</button>
+                    <button class="calc-btn number" onclick="addToEquation('5')">5</button>
+                    <button class="calc-btn number" onclick="addToEquation('6')">6</button>
+                    <button class="calc-btn operator" onclick="addToEquation('-')">−</button>
+                    
+                    <button class="calc-btn number" onclick="addToEquation('1')">1</button>
+                    <button class="calc-btn number" onclick="addToEquation('2')">2</button>
+                    <button class="calc-btn number" onclick="addToEquation('3')">3</button>
+                    <button class="calc-btn operator" onclick="addToEquation('+')">+</button>
+                    
+                    <button class="calc-btn number" onclick="addToEquation('0')">0</button>
+                    <button class="calc-btn number" onclick="addToEquation('.')">.</button>
+                    <button class="calc-btn equals" onclick="calculate()">=</button>
+                
+                </div>
+
+                <!-- This part of the code is designed for the scientific calculator -->
+                <div class="button-grid scientific-grid" id="scientificCalc" style="display: none;">
+                    
+                    <button class="calc-btn function" onclick="addToEquation('sin(')">sin</button>
+                    <button class="calc-btn function" onclick="addToEquation('cos(')">cos</button>
+                    <button class="calc-btn function" onclick="addToEquation('tan(')">tan</button>
+                    <button class="calc-btn function" onclick="addToEquation('log(')">log</button>
+                    <button class="calc-btn function" onclick="addToEquation('ln(')">ln</button>
+                    
+                    <button class="calc-btn function" onclick="addToEquation('π')">π</button>
+                    <button class="calc-btn function" onclick="addToEquation('e')">e</button>
+                    <button class="calc-btn function" onclick="addToEquation('(')"> ( </button>
+                    <button class="calc-btn function" onclick="addToEquation(')')"> ) </button>
+                    <button class="calc-btn function" onclick="addToEquation('^')">x^y</button>
+                    
+                    <button class="calc-btn clear" onclick="clearAll()">AC</button>
+                    <button class="calc-btn clear" onclick="clearEntry()">CE</button>
+                    <button class="calc-btn operator" onclick="addToEquation('%')">%</button>
+                    <button class="calc-btn function" onclick="addToEquation('sqrt(')">√</button>
+                    <button class="calc-btn operator" onclick="addToEquation('/')">÷</button>
+                    
+                    <button class="calc-btn number" onclick="addToEquation('7')">7</button>
+                    <button class="calc-btn number" onclick="addToEquation('8')">8</button>
+                    <button class="calc-btn number" onclick="addToEquation('9')">9</button>
+                    <button class="calc-btn function" onclick="addToEquation('!')">!</button>
+                    <button class="calc-btn operator" onclick="addToEquation('*')">×</button>
+                    
+                    <button class="calc-btn number" onclick="addToEquation('4')">4</button>
+                    <button class="calc-btn number" onclick="addToEquation('5')">5</button>
+                    <button class="calc-btn number" onclick="addToEquation('6')">6</button>
+                    <button class="calc-btn function" onclick="addToEquation('**2')">x²</button>
+                    <button class="calc-btn operator" onclick="addToEquation('-')">−</button>
+                    
+                    <button class="calc-btn number" onclick="addToEquation('1')">1</button>
+                    <button class="calc-btn number" onclick="addToEquation('2')">2</button>
+                    <button class="calc-btn number" onclick="addToEquation('3')">3</button>
+                    <button class="calc-btn function" onclick="addToEquation('1/')">1/x</button>
+                    <button class="calc-btn operator" onclick="addToEquation('+')">+</button>
+                    
+                    <button class="calc-btn number" onclick="addToEquation('0')">0</button>
+                    <button class="calc-btn number" onclick="addToEquation('.')">.</button>
+                    <button class="calc-btn number" onclick="addToEquation('00')">00</button>
+                    <button class="calc-btn equals" onclick="calculate()">=</button>
+                
+                </div>
+            </div>
+
+            <!-- This part of code takes care of the past calculations  -->
+            <div class="history-panel" id="historyPanel">
+                
+                <div class="history-container">
+                    <div class="history-title">History</div>
+                    <div id="historyList"></div>
+                </div>
+            
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.4.1/math.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="modern-calculator-calc.js"></script>
+    <script src="modern-calculator-eventListeners.js"></script>
+    <script src="modern-calculator-graph.js"></script>
+    <script src="modern-calculator-keyboardSupport.js"></script>
+    <script src="modern-calculator-ui.js"></script>
+
+    <script>
+        let equation = '';
+        let previousEquation = '';
+        let justCalculated = false;
+        let isScientific = false;
+        let history = [];
+        let chart = null;
+        // Initialize
+        updateDisplay();
+    </script>
+</body>
+</html>
